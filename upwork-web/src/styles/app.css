@@ -506,6 +506,34 @@ html[lang='ar'] .hero__title {
   max-width: 64ch;
   font-size: 1rem;
 }
+.service__items {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0;
+}
+.service__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--gray-50);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.service__item::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
 .service__cta {
   display: inline-flex;
   align-items: center;
@@ -814,7 +842,7 @@ html[dir='rtl'] .marquee__track {
   align-items: center;
   justify-content: center;
   aspect-ratio: 3 / 2;
-  padding: 1.1rem;
+  padding: 0.8rem;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -827,7 +855,7 @@ html[dir='rtl'] .marquee__track {
 }
 .client-card__logo {
   max-width: 100%;
-  max-height: 64px;
+  max-height: 112px;
   width: auto;
   height: auto;
   object-fit: contain;

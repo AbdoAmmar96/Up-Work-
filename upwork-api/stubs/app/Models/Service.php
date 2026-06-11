@@ -15,9 +15,9 @@ class Service extends Model implements HasMedia
 
     public array $translatable = ['title', 'excerpt', 'body'];
 
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'icon', 'sort_order', 'is_active'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'icon', 'items', 'sort_order', 'is_active'];
 
-    protected $casts = ['is_active' => 'boolean'];
+    protected $casts = ['is_active' => 'boolean', 'items' => 'array'];
 
     public function getSlugOptions(): SlugOptions
     {

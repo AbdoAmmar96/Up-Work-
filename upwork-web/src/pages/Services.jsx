@@ -49,6 +49,13 @@ export default function Services() {
                     <h2 className="service__title">{tt(svc.title)}</h2>
                   </div>
                   <p className="service__text">{tt(svc.body) || tt(svc.excerpt)}</p>
+                  {svc.items?.length > 0 && (
+                    <ul className="service__items">
+                      {svc.items.map((it, j) => (
+                        <li className="service__item" key={j}>{tt(it)}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
                 <Link to="/contact" className="service__cta">
                   {t('cta.contact')}

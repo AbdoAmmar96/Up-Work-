@@ -16,6 +16,7 @@ class ServiceResource extends JsonResource
             'excerpt' => $this->getTranslations('excerpt'),
             'body' => $this->getTranslations('body'),
             'icon' => $this->icon,
+            'items' => $this->items ?? [],
             'image' => $this->getFirstMediaUrl('image') ?: null,
             'sort_order' => $this->sort_order,
             'is_active' => $this->is_active,

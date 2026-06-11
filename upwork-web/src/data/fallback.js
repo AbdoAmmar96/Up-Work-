@@ -155,6 +155,12 @@ export const fallback = {
         ar: 'نقدّم خدمات التصميم الهندسي المتكامل لمشاريع الإنشاءات والمنشآت الصناعية، بمخطّطات دقيقة تراعي الجودة والكفاءة والتكلفة، وتمهّد لتنفيذ سلس ومضبوط.',
         en: 'We provide integrated engineering design services for construction and industrial projects — accurate plans that balance quality, efficiency and cost, paving the way for smooth, controlled execution.',
       },
+      items: [
+        { ar: 'التصميم المعماري', en: 'Architectural design' },
+        { ar: 'التصميم الإنشائي', en: 'Structural design' },
+        { ar: 'تصميم المنشآت الصناعية', en: 'Industrial facilities design' },
+        { ar: 'مخططات تنفيذية تفصيلية', en: 'Detailed shop drawings' },
+      ],
     },
     {
       id: 2, slug: 'civil-works', icon: 'building-skyscraper', image: null, sort_order: 2, is_active: true,
@@ -164,6 +170,12 @@ export const fallback = {
         ar: 'ننفّذ كامل الأعمال المدنية: أعمال التربة (Earth Works)، والخرسانات (Concrete Works)، وأعمال العزل (Insulation)، والتشطيبات (Finishing)، بفريق هندسي ومعدّات تضمن الجودة والالتزام بالمواعيد.',
         en: 'We carry out all civil works: Earth Works, Concrete Works, Insulation Works and Finishing Works — with an engineering team and equipment that guarantee quality and on-time delivery.',
       },
+      items: [
+        { ar: 'أعمال التربة', en: 'Earth Works' },
+        { ar: 'أعمال الخرسانات', en: 'Concrete Works' },
+        { ar: 'أعمال العزل', en: 'Insulation Works' },
+        { ar: 'أعمال التشطيبات', en: 'Finishing Works' },
+      ],
     },
     {
       id: 3, slug: 'steel-works', icon: 'building', image: null, sort_order: 3, is_active: true,
@@ -173,6 +185,12 @@ export const fallback = {
         ar: 'نصمّم وننفّذ الهياكل المعدنية (Portal & Truss Frames)، وتصنيع الأوناش بأي قدرة تحميل، وخزّانات التخزين بأنواعها (رأسي، أفقي، على عربة، تحت الأرض، أحادي ومزدوج الجدار)، والسايلوهات بالاستانلس والألومنيوم.',
         en: 'We design and build steel structures (Portal & Truss Frames), fabricate cranes of any load capacity, and produce all types of storage tanks (vertical, horizontal, on-car, underground, single & double jacket) and silos in stainless steel and aluminum.',
       },
+      items: [
+        { ar: 'الهياكل المعدنية (جمالونات)', en: 'Steel Structures (Frames)' },
+        { ar: 'تصنيع الأوناش بأي حمولة', en: 'Crane fabrication (any capacity)' },
+        { ar: 'خزّانات التخزين', en: 'Storage Tanks' },
+        { ar: 'السايلوهات والتنكات', en: 'Silos & Tanks' },
+      ],
     },
     {
       id: 4, slug: 'electro-mechanical-works', icon: 'spark', image: null, sort_order: 4, is_active: true,
@@ -182,6 +200,12 @@ export const fallback = {
         ar: 'ننفّذ كامل الأعمال الإلكتروميكانيكية: أعمال التيار المنخفض (Low current)، وأعمال التكييف (HVAC)، وأنظمة الإنذار ومكافحة الحريق (Fire alarm & Fire fighting)، وأعمال الصرف الصحي والسباكة (Drainage & Plumbing).',
         en: 'We deliver complete electro-mechanical works: Low current works, HVAC works, Fire alarm & Fire fighting systems, and Drainage & Plumbing works.',
       },
+      items: [
+        { ar: 'أعمال التيار المنخفض', en: 'Low current works' },
+        { ar: 'أعمال التكييف', en: 'HVAC works' },
+        { ar: 'الإنذار ومكافحة الحريق', en: 'Fire alarm & Fire fighting' },
+        { ar: 'الصرف الصحي والسباكة', en: 'Drainage & Plumbing' },
+      ],
     },
     {
       id: 5, slug: 'engineering-services', icon: 'trending-up', image: null, sort_order: 5, is_active: true,
@@ -191,6 +215,12 @@ export const fallback = {
         ar: 'نوفّر خدمات هندسية متخصّصة تشمل: أنواع السيور الناقلة (Belt / Roller / Chain / Screw conveyors)، وأنظمة التخزين الثقيلة والمتوسطة والخفيفة (Racking systems)، وطاولات الرفع المقصية (Scissor lift tables) بأي قدرة وأبعاد وارتفاع، وتركيب جميع أنواع الماكينات وربطها بخطوط الإنتاج.',
         en: 'We provide specialized engineering services including: all types of conveyors (Belt / Roller / Chain / Screw), heavy/medium/light racking systems, scissor lift tables of any capacity, dimensions and height, and installation of all machine types linked to their production lines.',
       },
+      items: [
+        { ar: 'السيور الناقلة (Conveyors)', en: 'Conveyors' },
+        { ar: 'أنظمة التخزين (Racking)', en: 'Racking systems' },
+        { ar: 'طاولات الرفع المقصية', en: 'Scissor lift tables' },
+        { ar: 'تركيب الماكينات', en: 'Machine installations' },
+      ],
     },
   ],
 
