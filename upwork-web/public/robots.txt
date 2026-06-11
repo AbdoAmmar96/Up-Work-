@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://upwork-eg.com/sitemap.xml

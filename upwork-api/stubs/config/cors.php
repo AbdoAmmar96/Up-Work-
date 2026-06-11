@@ -1,0 +1,23 @@
+<?php
+
+return [
+    'paths' => ['api/*', 'login', 'logout', 'sanctum/csrf-cookie'],
+
+    'allowed_methods' => ['*'],
+
+    // Comma-separated list in .env: FRONTEND_URLS=https://upwork.com,https://admin.upwork.com
+    'allowed_origins' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', env('FRONTEND_URLS', 'http://localhost:5173,http://localhost:5174'))
+    ))),
+
+    'allowed_origins_patterns' => [],
+
+    'allowed_headers' => ['*'],
+
+    'exposed_headers' => [],
+
+    'max_age' => 0,
+
+    'supports_credentials' => true,
+];

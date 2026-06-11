@@ -1,0 +1,221 @@
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate, Navigate } from 'react-router-dom'
+import client from '../api/client'
+import { resources } from '../config/resources'
+import { useToast } from '../lib/toast'
+import { toML } from '../lib/ml'
+import Field from '../components/Field'
+import Spinner from '../components/Spinner'
+
+const relKey = (name) => name.replace(/_id$/, '')
+
+function buildInitial(cfg, record) {
+  const values = {}
+  cfg.fields.forEach((f) => {
+    const raw = record?.[f.name]
+    switch (f.type) {
+      case 'ml_text':
+      case 'ml_textarea':
+        values[f.name] = toML(raw)
+        break
+      case 'bool':
+        values[f.name] = raw ?? f.default ?? false
+        break
+      case 'image':
+        values[f.name] = { current: raw || null, file: null }
+        break
+      case 'gallery':
+        values[f.name] = [] // new files only
+        break
+      case 'relation': {
+        const rel = record?.[relKey(f.name)]
+        values[f.name] = rel?.id != null ? String(rel.id) : ''
+        break
+      }
+      case 'number':
+        values[f.name] = raw ?? f.default ?? ''
+        break
+      default:
+        values[f.name] = raw ?? f.default ?? ''
+    }
+  })
+  return values
+}
+
+export default function ResourceForm() {
+  const { resource, id } = useParams()
+  const navigate = useNavigate()
+  const toast = useToast()
+  const cfg = resources[resource]
+  const editing = id && id !== 'new'
+
+  const [values, setValues] = useState(null)
+  const [galleryExisting, setGalleryExisting] = useState({})
+  const [relOptions, setRelOptions] = useState({})
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    if (!cfg) return
+    let active = true
+    setLoading(true)
+
+    const relFields = cfg.fields.filter((f) => f.type === 'relation')
+    const relReqs = relFields.map((f) =>
+      client.get(resources[f.source].path, { params: { per_page: 100 } }).then((res) => ({ name: f.name, list: res.data?.data ?? res.data ?? [] }))
+    )
+
+    const recordReq = editing ? client.get(`${cfg.path}/${id}`).then((res) => res.data?.data ?? res.data) : Promise.resolve(null)
+
+    Promise.all([recordReq, Promise.all(relReqs)])
+      .then(([record, rels]) => {
+        if (!active) return
+        const opts = {}
+        rels.forEach((r) => (opts[r.name] = r.list))
+        setRelOptions(opts)
+        setValues(buildInitial(cfg, record))
+        const gex = {}
+        cfg.fields
+          .filter((f) => f.type === 'gallery')
+          .forEach((f) => (gex[f.name] = record?.[f.name] || []))
+        setGalleryExisting(gex)
+      })
+      .catch(() => toast.push('تعذّر تحميل النموذج', 'err'))
+      .finally(() => active && setLoading(false))
+
+    return () => {
+      active = false
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resource, id])
+
+  if (!cfg) return <Navigate to="/" replace />
+  if (loading || !values) return <Spinner />
+
+  const setField = (name, val) => setValues((v) => ({ ...v, [name]: val }))
+
+  const deleteExisting = async (fieldName, mediaId) => {
+    try {
+      await client.delete(`${cfg.path}/${id}/images/${mediaId}`)
+      setGalleryExisting((g) => ({ ...g, [fieldName]: g[fieldName].filter((x) => x.id !== mediaId) }))
+      toast.push('تم حذف الصورة')
+    } catch (e) {
+      toast.push('تعذّر حذف الصورة', 'err')
+    }
+  }
+
+  const validate = () => {
+    for (const f of cfg.fields) {
+      if (!f.required) continue
+      const v = values[f.name]
+      if (f.type === 'ml_text' || f.type === 'ml_textarea') {
+        if (!(v?.ar || '').trim()) return `حقل «${f.label.ar}» مطلوب (بالعربية على الأقل).`
+      } else if (!v && v !== 0) {
+        return `حقل «${f.label.ar}» مطلوب.`
+      }
+    }
+    return null
+  }
+
+  const save = async () => {
+    const v = validate()
+    if (v) {
+      setError(v)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    setError(null)
+    setSaving(true)
+    try {
+      if (cfg.multipart) {
+        const fd = new FormData()
+        cfg.fields.forEach((f) => {
+          const val = values[f.name]
+          if (f.type === 'ml_text' || f.type === 'ml_textarea') {
+            fd.append(`${f.name}[ar]`, val?.ar || '')
+            fd.append(`${f.name}[en]`, val?.en || '')
+          } else if (f.type === 'bool') {
+            fd.append(f.name, val ? '1' : '0')
+          } else if (f.type === 'image') {
+            if (val?.file) fd.append(f.name, val.file)
+          } else if (f.type === 'gallery') {
+            ;(val || []).forEach((file) => fd.append(`${f.name}[]`, file))
+          } else if (f.type === 'relation') {
+            if (val) fd.append(f.name, val)
+          } else if (val !== '' && val != null) {
+            fd.append(f.name, val)
+          }
+        })
+        if (editing) {
+          fd.append('_method', 'PUT')
+          await client.post(`${cfg.path}/${id}`, fd)
+        } else {
+          await client.post(cfg.path, fd)
+        }
+      } else {
+        const body = {}
+        cfg.fields.forEach((f) => {
+          const val = values[f.name]
+          if (f.type === 'ml_text' || f.type === 'ml_textarea') {
+            body[f.name] = { ar: val?.ar || '', en: val?.en || '' }
+          } else if (f.type === 'bool') {
+            body[f.name] = !!val
+          } else if (f.type === 'relation') {
+            body[f.name] = val ? Number(val) : null
+          } else if (f.type === 'number') {
+            body[f.name] = val === '' || val == null ? null : Number(val)
+          } else {
+            body[f.name] = val
+          }
+        })
+        if (editing) await client.put(`${cfg.path}/${id}`, body)
+        else await client.post(cfg.path, body)
+      }
+      toast.push(editing ? 'تم حفظ التعديلات' : 'تمت الإضافة بنجاح')
+      navigate(`/${resource}`)
+    } catch (err) {
+      const errs = err?.response?.data?.errors
+      const msg = errs ? Object.values(errs)[0]?.[0] : err?.response?.data?.message
+      setError(msg || 'حدث خطأ أثناء الحفظ. تحقّق من البيانات وحاول مرة أخرى.')
+      toast.push('فشل الحفظ', 'err')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <>
+      <div className="page-head">
+        <div>
+          <h2>{editing ? `تعديل ${cfg.singular.ar}` : `إضافة ${cfg.singular.ar}`}</h2>
+        </div>
+      </div>
+
+      <div className="card card--pad" style={{ maxWidth: 760 }}>
+        {error && <div className="note note--err">{error}</div>}
+        <div className="form-grid">
+          {cfg.fields.map((f) => (
+            <Field
+              key={f.name}
+              field={f}
+              value={values[f.name]}
+              onChange={(val) => setField(f.name, val)}
+              options={f.type === 'relation' ? relOptions[f.name] : undefined}
+              existing={f.type === 'gallery' ? galleryExisting[f.name] : undefined}
+              onDeleteExisting={f.type === 'gallery' && editing ? (mediaId) => deleteExisting(f.name, mediaId) : () => toast.push('احفظ أولاً ثم احذف', 'err')}
+            />
+          ))}
+        </div>
+        <div className="form-actions">
+          <button className="btn btn--primary" onClick={save} disabled={saving}>
+            {saving ? 'جاري الحفظ...' : editing ? 'حفظ التعديلات' : 'إضافة'}
+          </button>
+          <button className="btn btn--ghost" onClick={() => navigate(`/${resource}`)} disabled={saving}>
+            إلغاء
+          </button>
+        </div>
+      </div>
+    </>
+  )
+}

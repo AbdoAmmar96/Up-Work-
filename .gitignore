@@ -1,0 +1,28 @@
+# Generated Laravel app (built from upwork-api/stubs via setup.sh — not source)
+upwork-api/upwork-api-app/
+
+# Node
+node_modules/
+dist/
+
+# Env files (never commit secrets)
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Misc
+*.tmp
+
+# Local Claude Code config + personal dev notes
+.claude/
+How it work
