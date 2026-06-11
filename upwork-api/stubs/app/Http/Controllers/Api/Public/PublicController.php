@@ -23,7 +23,7 @@ class PublicController extends Controller
 {
     protected array $publicSettingKeys = [
         'site_title', 'tagline', 'slogan', 'phone', 'whatsapp', 'email',
-        'address', 'working_hours', 'social', 'colors', 'capabilities',
+        'address', 'working_hours', 'social', 'colors', 'capabilities', 'clients',
         'logo', 'seo_title', 'seo_description',
     ];
 
