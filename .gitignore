@@ -4,6 +4,7 @@ upwork-api/upwork-api-app/
 # Node
 node_modules/
 dist/
+dist-deploy/
 
 # Env files (never commit secrets)
 .env

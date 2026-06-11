@@ -1,0 +1,12 @@
+# ضع هذا الملف باسم .htaccess في جذر مجلد الـ API على السيرفر
+# (المجلد اللي بيشاور عليه api.upworkeg.com)
+# وظيفته: تحويل كل الطلبات إلى مجلد Laravel public/
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # فرض HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
