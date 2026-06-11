@@ -49,18 +49,38 @@ class DatabaseSeeder extends Seeder
             'phone' => '+20 100 777 9886',
             'whatsapp' => '201007779886',
             'email' => 'info@upwork-eg.com',
-            'address' => ['ar' => 'القاهرة، مصر', 'en' => 'Cairo, Egypt'],
+            'address' => ['ar' => 'مدينة العبور، الحي الأول', 'en' => 'Obour City, First District'],
             'working_hours' => ['ar' => 'السبت – الخميس، 9 ص – 5 م', 'en' => 'Sat–Thu, 9am–5pm'],
             'social' => ['facebook' => '#', 'instagram' => '#', 'linkedin' => '#', 'youtube' => '#'],
             'colors' => ['primary' => '#1E40AF', 'accent' => '#F97316', 'dark' => '#1F2937', 'light' => '#E5E7EB'],
             'capabilities' => [
                 ['ar' => 'مشاريع تسليم مفتاح', 'en' => 'Turnkey Projects'],
+                ['ar' => 'أعمال التصميم', 'en' => 'Design Works'],
                 ['ar' => 'أعمال مدنية', 'en' => 'Civil Works'],
                 ['ar' => 'أعمال معدنية', 'en' => 'Steel Works'],
+                ['ar' => 'سايلوهات وتنكات', 'en' => 'Tanks & Silos'],
+                ['ar' => 'جمالونات', 'en' => 'Steel Frames'],
                 ['ar' => 'كهروميكانيكا', 'en' => 'Electromechanical'],
                 ['ar' => 'تشطيبات', 'en' => 'Finishing'],
                 ['ar' => 'عزل', 'en' => 'Insulation'],
-                ['ar' => 'حلول صناعية', 'en' => 'Industrial Solutions'],
+                ['ar' => 'خدمات هندسية', 'en' => 'Engineering Services'],
+            ],
+            'clients' => [
+                ['name' => 'Advocure', 'logo' => '/clients/advocure.png'],
+                ['name' => 'Danone', 'logo' => '/clients/danone.png'],
+                ['name' => 'H2O Group', 'logo' => '/clients/h2o.png'],
+                ['name' => 'Kandil Glass', 'logo' => '/clients/kandilglass.png'],
+                ['name' => 'Koki', 'logo' => '/clients/koki.png'],
+                ['name' => 'Kandil Steel', 'logo' => '/clients/kandilsteel.png'],
+                ['name' => 'Egyptian Starch & Glucose', 'logo' => '/clients/egyptianstarch.png'],
+                ['name' => 'Otsuka', 'logo' => '/clients/otsuka.png'],
+                ['name' => 'Akhnaton', 'logo' => '/clients/akhnaton.png'],
+                ['name' => 'Eva Cosmetics', 'logo' => '/clients/eva.png'],
+                ['name' => 'United Company of Pharmacists', 'logo' => '/clients/ucp.png'],
+                ['name' => 'Farm Frites', 'logo' => '/clients/farmfrites.png'],
+                ['name' => 'Ülker', 'logo' => '/clients/ulker.png'],
+                ['name' => 'Avon', 'logo' => '/clients/avon.png'],
+                ['name' => 'Oriflame', 'logo' => '/clients/oriflame.png'],
             ],
             'logo' => null,
             'seo_title' => ['ar' => 'UP Work | هندسة ومقاولات', 'en' => 'UP Work | Engineering & Construction'],
@@ -125,8 +145,8 @@ class DatabaseSeeder extends Seeder
                 'payload' => [
                     'title' => ['ar' => 'من نحن', 'en' => 'About UP Work'],
                     'body' => [
-                        'ar' => 'UP Work شركة متخصصة في الحلول الهندسية والمقاولات الحديثة، تقدّم خدمات متكاملة في مجالات الإنشاءات وإدارة المشاريع والبنية التحتية بأعلى معايير الجودة والاحترافية. نعتمد على فريق من المهندسين والخبراء لتقديم حلول عملية ومستدامة تلبّي احتياجات عملائنا وتواكب تطوّرات السوق الهندسي الحديث، ونسعى إلى بناء مستقبل أقوى من خلال الابتكار والدقّة والالتزام بتنفيذ المشاريع بكفاءة عالية وفي الوقت المحدّد.',
-                        'en' => 'UP Work is a modern engineering and construction company delivering integrated solutions across construction, project management, and infrastructure development. We combine expertise, precision, and innovation to build projects that meet the highest standards of quality, safety, and professionalism — driven by a skilled team committed to sustainable developments and a stronger future for our clients and communities.',
+                        'ar' => 'يقولون إن لحظة الحقيقة لشركات المقاولات تأتي مع التقدّم في السن، فتجاوز العشرين عامًا في هذا المجال علامة بارزة على النضج والوجود القوي. نحن نوظّف أكثر من 300 فرد ونعمل من خلال شركتين فرعيتين مملوكتين بالكامل: الشركة المصرية الألمانية للأعمال الإنشائية ومجموعة United، مع حضور قوي وسريع النمو في السودان. عبر UP Work نتخصّص في مشاريع كبيرة ومعقّدة للغاية مثل المخازن الإقليمية والمنشآت الصناعية والبنية التحتية والمستشفيات والمساحات التجارية. كما نملك خطوطًا تكميلية تشمل مصانع تصنيع المعادن ومصنع لإنتاج منتجات الخرسانة.',
+                        'en' => 'They say that the moment of truth for construction companies comes with age — passing 20 years in this business is a landmark and a sign of maturity and a strong, rapidly growing presence in Sudan. We employ more than 300 individuals and operate through two fully owned subsidiary companies: EGYPT-GERMAN for construction works and United Group. Through UP-Work we specialize in large-scale, highly complex projects such as regional stores, industrial plants, infrastructure, hospitals and commercial spaces. UP-Work also owns complementary business lines including steel fabrication plants and a concrete products production plant.',
                     ],
                 ],
             ],
@@ -144,13 +164,43 @@ class DatabaseSeeder extends Seeder
                 ],
             ],
             [
-                'key' => 'about_cta',
+                'key' => 'about_vms',
                 'page' => 'about',
                 'sort_order' => 3,
                 'payload' => [
-                    'title' => ['ar' => 'عندك مشروع في بالك؟', 'en' => 'Have a project in mind?'],
-                    'text' => ['ar' => 'كلّمنا، ونحوّل فكرتك لخطّة تنفيذ واضحة بجدول وميزانية.', 'en' => 'Talk to us — we turn your idea into a clear execution plan with a timeline and a budget.'],
-                    'cta' => ['ar' => 'كلّمنا', 'en' => 'Contact us'],
+                    'items' => [
+                        [
+                            'title' => ['ar' => 'رؤيتنا', 'en' => 'Our Vision'],
+                            'text' => [
+                                'ar' => 'بالاستفادة من أدائنا الاستثنائي خلال أكثر من 20 عامًا من وجودنا، والخبرة المكتسبة في تقديم تصميم متكامل بأسعار مناسبة وجودة عالية، نطمح أن نكون المقاول والمطوّر الأكثر ثقة وتأهيلًا في الشرق الأوسط، ورائدًا قويًا في الداخل والشريك الإقليمي المفضّل.',
+                                'en' => 'Leveraging our exceptional performance through our 20+ years of existence, and the experience acquired in providing integrated, rightly-priced and highly styled construction. We aspire to be recognized as the most trusted and qualified contractor and developer in the Middle East — a solid leader at home and the regional partner of choice.',
+                            ],
+                        ],
+                        [
+                            'title' => ['ar' => 'مهمتنا', 'en' => 'Our Mission'],
+                            'text' => [
+                                'ar' => 'بفضل رأس مالنا البشري الذي نعتزّ به، سنترك بصمة في أسواقنا المحلية والأجنبية، باحثين عن أعمال عالية القيمة الأنسب لمقاول مختار للهندسة القيمة بتناغم وأسلوب مميّز. أن نكون الأفضل في السلامة والجودة والوقت والتكلفة في المنطقة.',
+                                'en' => 'With our human capital that we most cherish, we will be out there constructing a difference in our domestic and foreign markets — seeking high-value and complex business most suitable for a contractor of choice for value engineering with synergy and style. To be the region’s top safety, quality, time and cost performer.',
+                            ],
+                        ],
+                        [
+                            'title' => ['ar' => 'إستراتيجيتنا', 'en' => 'Our Strategy'],
+                            'text' => [
+                                'ar' => 'لضمان نمونا الحالي بشكل مستدام، سنجعل أولوياتنا جذب وتطوير الأفراد المؤهّلين في أسواقنا والحفاظ عليهم؛ فالاستثمار المستمر في الأفراد على جميع مستويات أعمالنا هو حجر الزاوية في إستراتيجيتنا لتحقيق نموٍّ وتنمية مستدامين في المستقبل.',
+                                'en' => 'To ensure our present growth is sustainable, we prioritize our efforts to attract, develop and retain the most qualified individuals in our markets. This ongoing investment in people, at all levels of our business, is the corner stone of our strategy for a sustainable future growth and development.',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'key' => 'about_cta',
+                'page' => 'about',
+                'sort_order' => 4,
+                'payload' => [
+                    'title' => ['ar' => 'هل لديك مشروع في ذهنك؟', 'en' => 'Have a project in mind?'],
+                    'text' => ['ar' => 'تواصل معنا، ونحوّل فكرتك إلى خطة تنفيذ واضحة بجدول زمني وميزانية.', 'en' => 'Talk to us — we turn your idea into a clear execution plan with a timeline and a budget.'],
+                    'cta' => ['ar' => 'تواصل معنا', 'en' => 'Contact us'],
                 ],
             ],
         ];
@@ -164,33 +214,53 @@ class DatabaseSeeder extends Seeder
     {
         $services = [
             [
-                'icon' => 'ti-building-skyscraper',
+                'icon' => 'layers',
                 'sort_order' => 1,
-                'title' => ['ar' => 'المقاولات والإنشاءات', 'en' => 'Contracting & Construction'],
-                'excerpt' => ['ar' => 'مبانٍ سكنية وتجارية ومنشآت صناعية ومخازن.', 'en' => 'Residential, commercial, and industrial buildings and warehouses.'],
+                'title' => ['ar' => 'أعمال التصميم', 'en' => 'Design Works'],
+                'excerpt' => ['ar' => 'تصاميم هندسية دقيقة تترجم رؤيتك إلى مخططات تنفيذية.', 'en' => 'Precise engineering designs that turn your vision into executable plans.'],
                 'body' => [
-                    'ar' => 'ننفّذ مشاريع المقاولات للمباني السكنية والتجارية والمنشآت الصناعية والمخازن، من الأساسات حتى التشطيب، بفريق هندسي ومعدّات تضمن الجودة والالتزام بالمواعيد.',
-                    'en' => 'We deliver contracting projects for residential and commercial buildings, industrial facilities, and warehouses — from foundations to finishing — with an engineering team and equipment that guarantee quality and on-time delivery.',
+                    'ar' => 'نقدّم خدمات التصميم الهندسي المتكامل لمشاريع الإنشاءات والمنشآت الصناعية، بمخطّطات دقيقة تراعي الجودة والكفاءة والتكلفة، وتمهّد لتنفيذ سلس ومضبوط.',
+                    'en' => 'We provide integrated engineering design services for construction and industrial projects — accurate plans that balance quality, efficiency and cost, paving the way for smooth, controlled execution.',
                 ],
             ],
             [
-                'icon' => 'ti-clipboard-check',
+                'icon' => 'building-skyscraper',
                 'sort_order' => 2,
-                'title' => ['ar' => 'إدارة المشاريع الهندسية', 'en' => 'Engineering Project Management'],
-                'excerpt' => ['ar' => 'من التخطيط حتى التسليم، بجدول واضح وتحكّم في التكلفة.', 'en' => 'From planning to handover, with clear timelines and cost control.'],
+                'title' => ['ar' => 'الأعمال المدنية', 'en' => 'Civil Works'],
+                'excerpt' => ['ar' => 'أعمال التربة والخرسانات والعزل والتشطيبات.', 'en' => 'Earth works, concrete, insulation and finishing.'],
                 'body' => [
-                    'ar' => 'ندير مشروعك من التخطيط والجدولة وحتى التسليم، مع تحكّم واضح في التكلفة والجودة والمخاطر، وتقارير دورية تبقيك على اطّلاع بكل خطوة.',
-                    'en' => 'We manage your project from planning and scheduling through to handover — with clear control over cost, quality, and risk, and regular reporting that keeps you informed at every step.',
+                    'ar' => 'ننفّذ كامل الأعمال المدنية: أعمال التربة (Earth Works)، والخرسانات (Concrete Works)، وأعمال العزل (Insulation)، والتشطيبات (Finishing)، بفريق هندسي ومعدّات تضمن الجودة والالتزام بالمواعيد.',
+                    'en' => 'We carry out all civil works: Earth Works, Concrete Works, Insulation Works and Finishing Works — with an engineering team and equipment that guarantee quality and on-time delivery.',
                 ],
             ],
             [
-                'icon' => 'ti-road',
+                'icon' => 'building',
                 'sort_order' => 3,
-                'title' => ['ar' => 'تطوير البنية التحتية', 'en' => 'Infrastructure Development'],
-                'excerpt' => ['ar' => 'الطرق وشبكات المرافق التي تربط المدن.', 'en' => 'Roads and utility networks that connect cities.'],
+                'title' => ['ar' => 'الأعمال المعدنية', 'en' => 'Steel Works'],
+                'excerpt' => ['ar' => 'هياكل معدنية وجمالونات وخزّانات وسايلوهات.', 'en' => 'Steel structures, frames, storage tanks and silos.'],
                 'body' => [
-                    'ar' => 'نطوّر الطرق وشبكات المرافق التي تربط المدن وتؤسّس لنموٍّ مستدام، بتنفيذ يراعي المعايير الفنية والبيئية.',
-                    'en' => 'We develop roads and utility networks that connect cities and lay the foundation for sustainable growth — executed to technical and environmental standards.',
+                    'ar' => 'نصمّم وننفّذ الهياكل المعدنية (Portal & Truss Frames)، وتصنيع الأوناش بأي قدرة تحميل، وخزّانات التخزين بأنواعها (رأسي، أفقي، على عربة، تحت الأرض، أحادي ومزدوج الجدار)، والسايلوهات بالاستانلس والألومنيوم.',
+                    'en' => 'We design and build steel structures (Portal & Truss Frames), fabricate cranes of any load capacity, and produce all types of storage tanks (vertical, horizontal, on-car, underground, single & double jacket) and silos in stainless steel and aluminum.',
+                ],
+            ],
+            [
+                'icon' => 'spark',
+                'sort_order' => 4,
+                'title' => ['ar' => 'الأعمال الإلكتروميكانيكية', 'en' => 'Electro-Mechanical Works'],
+                'excerpt' => ['ar' => 'تيار منخفض، تكييف، إنذار ومكافحة حريق، وسباكة.', 'en' => 'Low current, HVAC, fire alarm & fighting, plumbing.'],
+                'body' => [
+                    'ar' => 'ننفّذ كامل الأعمال الإلكتروميكانيكية: أعمال التيار المنخفض (Low current)، وأعمال التكييف (HVAC)، وأنظمة الإنذار ومكافحة الحريق (Fire alarm & Fire fighting)، وأعمال الصرف الصحي والسباكة (Drainage & Plumbing).',
+                    'en' => 'We deliver complete electro-mechanical works: Low current works, HVAC works, Fire alarm & Fire fighting systems, and Drainage & Plumbing works.',
+                ],
+            ],
+            [
+                'icon' => 'trending-up',
+                'sort_order' => 5,
+                'title' => ['ar' => 'الخدمات الهندسية', 'en' => 'Engineering Services'],
+                'excerpt' => ['ar' => 'سيور نقل، أنظمة تخزين (راكينج)، طاولات رفع، وتركيب ماكينات.', 'en' => 'Conveyors, racking systems, scissor lift tables and machine installations.'],
+                'body' => [
+                    'ar' => 'نوفّر خدمات هندسية متخصّصة تشمل: أنواع السيور الناقلة (Belt / Roller / Chain / Screw conveyors)، وأنظمة التخزين الثقيلة والمتوسطة والخفيفة (Racking systems)، وطاولات الرفع المقصية (Scissor lift tables) بأي قدرة وأبعاد وارتفاع، وتركيب جميع أنواع الماكينات وربطها بخطوط الإنتاج.',
+                    'en' => 'We provide specialized engineering services including: all types of conveyors (Belt / Roller / Chain / Screw), heavy/medium/light racking systems, scissor lift tables of any capacity, dimensions and height, and installation of all machine types linked to their production lines.',
                 ],
             ],
         ];
