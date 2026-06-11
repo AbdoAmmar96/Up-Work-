@@ -25,6 +25,7 @@ export default function About() {
   const h = sectionsToMap(homePages)
   const intro = a.about_intro || {}
   const values = a.about_values?.items || []
+  const vms = a.about_vms?.items || []
 
   return (
     <>
@@ -70,6 +71,27 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {vms.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <SectionHeading
+              center
+              eyebrow={tt({ ar: 'هويتنا', en: 'Who we are' })}
+              title={tt({ ar: 'رؤيتنا ومهمتنا وإستراتيجيتنا', en: 'Vision, Mission & Strategy' })}
+            />
+            <div className="cards-3">
+              {vms.map((v, i) => (
+                <Reveal className="vms-card" key={i} delay={i * 0.1}>
+                  <div className="vms-card__index">0{i + 1}</div>
+                  <h3 className="vms-card__title">{tt(v.title)}</h3>
+                  <p className="vms-card__text">{tt(v.text)}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {h.home_stats?.items && (
         <section className="section section--dark">

@@ -11,6 +11,7 @@ import Pillars from '../components/Pillars'
 import Stats from '../components/Stats'
 import ProjectCard from '../components/ProjectCard'
 import CapabilitiesMarquee from '../components/CapabilitiesMarquee'
+import ClientsStrip from '../components/ClientsStrip'
 import CTASection from '../components/CTASection'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
@@ -115,6 +116,24 @@ export default function Home() {
         </div>
         <CapabilitiesMarquee items={settings.capabilities} />
       </section>
+
+      {/* Clients / brands */}
+      {settings.clients?.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <SectionHeading
+              center
+              eyebrow={t('clients_eyebrow')}
+              title={t('clients_title')}
+              lead={tt({
+                ar: 'فخورون بثقة نخبة من كبرى الشركات والعلامات التجارية في السوق.',
+                en: 'Proud to be trusted by leading companies and brands across the market.',
+              })}
+            />
+            <ClientsStrip items={settings.clients} />
+          </div>
+        </section>
+      )}
 
       <CTASection
         data={{

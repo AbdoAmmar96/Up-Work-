@@ -1,11 +1,11 @@
-# SPA routing — أي مسار مش ملف حقيقي يرجع index.html
+# SPA routing للموقع العام (root) — أي مسار مش ملف حقيقي يرجع index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # لو الطلب على HTTP حوّله HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  # لا تتدخّل في الـ API ولا الدّاشبورد (مجلدات منفصلة لها معالجتها الخاصة)
+  RewriteRule ^api(/.*)?$ - [L]
+  RewriteRule ^dashboard(/.*)?$ - [L]
 
   # ملفات وفولدرات موجودة فعلاً تُخدّم زي ما هي
   RewriteCond %{REQUEST_FILENAME} -f [OR]

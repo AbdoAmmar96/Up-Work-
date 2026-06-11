@@ -1,16 +1,15 @@
-# SPA routing للدّاشبورد — أي مسار مش ملف حقيقي يرجع index.html
+# SPA routing للدّاشبورد — مقدّم من مجلد فرعي /dashboard/
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
+  RewriteBase /dashboard/
 
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
+  # ملفات وفولدرات موجودة فعلاً تُخدّم زي ما هي
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  RewriteRule ^ index.html [L]
+  # أي حاجة تانية → index.html بتاع الدّاشبورد
+  RewriteRule ^ /dashboard/index.html [L]
 </IfModule>
 
 # الدّاشبورد خاص — امنع الفهرسة
