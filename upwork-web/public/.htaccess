@@ -7,9 +7,10 @@
   RewriteRule ^api(/.*)?$ - [L]
   RewriteRule ^dashboard(/.*)?$ - [L]
 
-  # ملفات وفولدرات موجودة فعلاً تُخدّم زي ما هي
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
+  # الملفات الحقيقية فقط تُخدّم زي ما هي (الصور، JS، CSS...)
+  # ملاحظة: المجلدات مش بتتخدّم مباشرة عشان مسارات مثل /services (مجلد صور)
+  # ما تتعارضش مع مسارات React زي /services. الصور ملفات فبتشتغل عادي.
+  RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ - [L]
 
   # أي حاجة تانية → index.html (React Router)

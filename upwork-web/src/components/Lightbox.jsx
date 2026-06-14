@@ -1,8 +1,9 @@
 import React, { useEffect, useCallback } from 'react'
 import { Close, ChevronLeft, ChevronRight } from './icons'
 
-// Flexible modal: pass `video` (embed URL string) OR `images` (array) + index/setIndex.
-export default function Lightbox({ video, images, index = 0, setIndex, onClose }) {
+// Flexible modal: pass `video` (embed URL for iframe) OR `videoFile` (mp4 URL for HTML5 player)
+// OR `images` (array) + index/setIndex.
+export default function Lightbox({ video, videoFile, images, index = 0, setIndex, onClose }) {
   const hasGallery = Array.isArray(images) && images.length > 0
 
   const prev = useCallback(
@@ -38,11 +39,17 @@ export default function Lightbox({ video, images, index = 0, setIndex, onClose }
         {video && (
           <div className="lightbox__frame">
             <iframe
-              src={`${video}?autoplay=1&title=0&byline=0&portrait=0`}
+              src={`${video}?autoplay=1&title=0&byline=0&portrait=0&rel=0`}
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
               title="video"
             />
+          </div>
+        )}
+
+        {videoFile && (
+          <div className="lightbox__frame">
+            <video src={videoFile} controls autoPlay playsInline style={{ width: '100%', height: '100%' }} />
           </div>
         )}
 

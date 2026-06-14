@@ -51,9 +51,18 @@ export default function Services() {
                   <p className="service__text">{tt(svc.body) || tt(svc.excerpt)}</p>
                   {svc.items?.length > 0 && (
                     <ul className="service__items">
-                      {svc.items.map((it, j) => (
-                        <li className="service__item" key={j}>{tt(it)}</li>
-                      ))}
+                      {svc.items.map((it, j) => {
+                        const label = it.title ? tt(it.title) : tt(it)
+                        return it.slug ? (
+                          <li key={it.slug}>
+                            <Link to={`/services/${svc.slug}/${it.slug}`} className="service__item service__item--link">
+                              {label}
+                            </Link>
+                          </li>
+                        ) : (
+                          <li className="service__item" key={j}>{label}</li>
+                        )
+                      })}
                     </ul>
                   )}
                 </div>

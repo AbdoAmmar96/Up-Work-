@@ -100,6 +100,7 @@ export const resources = {
     title: { ar: 'الفيديوهات', en: 'Videos' },
     singular: { ar: 'فيديو', en: 'Video' },
     icon: 'Film',
+    multipart: true,
     columns: [
       { key: 'title', type: 'ml', label: 'العنوان' },
       { key: 'category', type: 'rel', label: 'التصنيف' },
@@ -108,11 +109,26 @@ export const resources = {
     fields: [
       { name: 'title', type: 'ml_text', label: { ar: 'العنوان', en: 'Title' }, required: true },
       {
-        name: 'vimeo_id',
+        name: 'source',
+        type: 'select',
+        label: { ar: 'مصدر الفيديو', en: 'Video source' },
+        options: ['youtube', 'upload'],
+        optionLabels: { youtube: 'رابط YouTube', upload: 'رفع ملف على الموقع' },
+        default: 'youtube',
+      },
+      {
+        name: 'youtube_id',
         type: 'text',
-        label: { ar: 'رابط أو ID فيديو Vimeo', en: 'Vimeo URL or ID' },
-        required: true,
-        hint: { ar: 'مثال: https://vimeo.com/76979871 أو 76979871', en: 'e.g. https://vimeo.com/76979871 or 76979871' },
+        label: { ar: 'رابط أو ID فيديو YouTube', en: 'YouTube URL or ID' },
+        showIf: { source: 'youtube' },
+        hint: { ar: 'مثال: https://youtu.be/dQw4w9WgXcQ أو dQw4w9WgXcQ', en: 'e.g. https://youtu.be/dQw4w9WgXcQ or dQw4w9WgXcQ' },
+      },
+      {
+        name: 'video',
+        type: 'videofile',
+        label: { ar: 'ملف الفيديو (mp4)', en: 'Video file (mp4)' },
+        showIf: { source: 'upload' },
+        hint: { ar: 'الحد الأقصى 150 ميجابايت. صيغ: mp4 / mov / webm', en: 'Max 150MB. Formats: mp4 / mov / webm' },
       },
       { name: 'category_id', type: 'relation', source: 'video-categories', label: { ar: 'التصنيف', en: 'Category' } },
       { name: 'description', type: 'ml_textarea', label: { ar: 'الوصف', en: 'Description' } },

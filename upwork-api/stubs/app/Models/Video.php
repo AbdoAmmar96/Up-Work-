@@ -12,7 +12,8 @@ class Video extends Model
     public array $translatable = ['title', 'description'];
 
     protected $fillable = [
-        'title', 'description', 'vimeo_id', 'thumbnail_url',
+        'title', 'description', 'source', 'youtube_id', 'video_file',
+        'vimeo_id', 'thumbnail_url',
         'duration', 'video_category_id', 'is_published', 'sort_order',
     ];
 
@@ -28,8 +29,22 @@ class Video extends Model
         return $q->where('is_published', true);
     }
 
-    public function embedUrl(): string
+    // رابط التضمين (للـ iframe) — للـ YouTube أو Vimeo. فاضي لو الفيديو مرفوع.
+    public function embedUrl(): ?string
     {
-        return "https://player.vimeo.com/video/{$this->vimeo_id}";
+        if ($this->source === 'youtube' && $this->youtube_id) {
+            return "https://www.youtube.com/embed/{$this->youtube_id}";
+        }
+        if ($this->source === 'vimeo' && $this->vimeo_id) {
+            return "https://player.vimeo.com/video/{$this->vimeo_id}";
+        }
+
+        return null;
+    }
+
+    // الرابط المباشر للملف المرفوع (mp4) — فاضي لو الفيديو من YouTube/Vimeo.
+    public function fileUrl(): ?string
+    {
+        return $this->video_file ? asset('storage/'.$this->video_file) : null;
     }
 }

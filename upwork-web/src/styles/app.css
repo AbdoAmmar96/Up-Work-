@@ -534,6 +534,112 @@ html[lang='ar'] .hero__title {
   background: var(--orange);
   flex-shrink: 0;
 }
+.service__item--link {
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--t), border-color var(--t), color var(--t), transform var(--t);
+}
+.service__item--link:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.service__item--link:hover::before {
+  background: #fff;
+}
+
+/* ---------- Sub-service detail page ---------- */
+.page-hero--compact {
+  min-height: auto;
+  padding-block: clamp(2.5rem, 8vw, 4.5rem);
+}
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: #aeb9d1;
+}
+.breadcrumb a {
+  color: #aeb9d1;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--orange);
+}
+.service__icon--sm {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  margin-inline-end: 0.4rem;
+}
+.sub-detail__body .lead {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--slate);
+  max-width: 70ch;
+}
+.sub-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2.4rem;
+}
+.sub-gallery__item {
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow: var(--shadow-sm);
+  background: var(--gray-100);
+}
+.sub-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease);
+}
+.sub-gallery__item:hover img {
+  transform: scale(1.06);
+}
+.sub-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.sub-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background var(--t), color var(--t), transform var(--t);
+}
+.sub-chip:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.sub-chip svg {
+  width: 16px;
+  height: 16px;
+}
+@media (max-width: 720px) {
+  .sub-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 .service__cta {
   display: inline-flex;
   align-items: center;

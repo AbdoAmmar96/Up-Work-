@@ -206,7 +206,7 @@ export default function ResourceForm() {
       <div className="card card--pad" style={{ maxWidth: 760 }}>
         {error && <div className="note note--err">{error}</div>}
         <div className="form-grid">
-          {cfg.fields.map((f) => (
+          {cfg.fields.filter((f) => isShown(f, values)).map((f) => (
             <Field
               key={f.name}
               field={f}

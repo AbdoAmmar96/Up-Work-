@@ -1,5 +1,6 @@
 // Bundled fallback content — mirrors the Laravel seeder.
 // Used automatically when the API is unreachable so the site always renders.
+import { servicesData } from './servicesData'
 
 const cat = (id, ar, en, slug, order) => ({ id, title: { ar, en }, slug, sort_order: order })
 
@@ -146,83 +147,7 @@ export const fallback = {
     },
   ],
 
-  services: [
-    {
-      id: 1, slug: 'design-works', icon: 'layers', image: null, sort_order: 1, is_active: true,
-      title: { ar: 'أعمال التصميم', en: 'Design Works' },
-      excerpt: { ar: 'تصاميم هندسية دقيقة تترجم رؤيتك إلى مخططات تنفيذية.', en: 'Precise engineering designs that turn your vision into executable plans.' },
-      body: {
-        ar: 'نقدّم خدمات التصميم الهندسي المتكامل لمشاريع الإنشاءات والمنشآت الصناعية، بمخطّطات دقيقة تراعي الجودة والكفاءة والتكلفة، وتمهّد لتنفيذ سلس ومضبوط.',
-        en: 'We provide integrated engineering design services for construction and industrial projects — accurate plans that balance quality, efficiency and cost, paving the way for smooth, controlled execution.',
-      },
-      items: [
-        { ar: 'التصميم المعماري', en: 'Architectural design' },
-        { ar: 'التصميم الإنشائي', en: 'Structural design' },
-        { ar: 'تصميم المنشآت الصناعية', en: 'Industrial facilities design' },
-        { ar: 'مخططات تنفيذية تفصيلية', en: 'Detailed shop drawings' },
-      ],
-    },
-    {
-      id: 2, slug: 'civil-works', icon: 'building-skyscraper', image: null, sort_order: 2, is_active: true,
-      title: { ar: 'الأعمال المدنية', en: 'Civil Works' },
-      excerpt: { ar: 'أعمال التربة والخرسانات والعزل والتشطيبات.', en: 'Earth works, concrete, insulation and finishing.' },
-      body: {
-        ar: 'ننفّذ كامل الأعمال المدنية: أعمال التربة (Earth Works)، والخرسانات (Concrete Works)، وأعمال العزل (Insulation)، والتشطيبات (Finishing)، بفريق هندسي ومعدّات تضمن الجودة والالتزام بالمواعيد.',
-        en: 'We carry out all civil works: Earth Works, Concrete Works, Insulation Works and Finishing Works — with an engineering team and equipment that guarantee quality and on-time delivery.',
-      },
-      items: [
-        { ar: 'أعمال التربة', en: 'Earth Works' },
-        { ar: 'أعمال الخرسانات', en: 'Concrete Works' },
-        { ar: 'أعمال العزل', en: 'Insulation Works' },
-        { ar: 'أعمال التشطيبات', en: 'Finishing Works' },
-      ],
-    },
-    {
-      id: 3, slug: 'steel-works', icon: 'building', image: null, sort_order: 3, is_active: true,
-      title: { ar: 'الأعمال المعدنية', en: 'Steel Works' },
-      excerpt: { ar: 'هياكل معدنية وجمالونات وخزّانات وسايلوهات.', en: 'Steel structures, frames, storage tanks and silos.' },
-      body: {
-        ar: 'نصمّم وننفّذ الهياكل المعدنية (Portal & Truss Frames)، وتصنيع الأوناش بأي قدرة تحميل، وخزّانات التخزين بأنواعها (رأسي، أفقي، على عربة، تحت الأرض، أحادي ومزدوج الجدار)، والسايلوهات بالاستانلس والألومنيوم.',
-        en: 'We design and build steel structures (Portal & Truss Frames), fabricate cranes of any load capacity, and produce all types of storage tanks (vertical, horizontal, on-car, underground, single & double jacket) and silos in stainless steel and aluminum.',
-      },
-      items: [
-        { ar: 'الهياكل المعدنية (جمالونات)', en: 'Steel Structures (Frames)' },
-        { ar: 'تصنيع الأوناش بأي حمولة', en: 'Crane fabrication (any capacity)' },
-        { ar: 'خزّانات التخزين', en: 'Storage Tanks' },
-        { ar: 'السايلوهات والتنكات', en: 'Silos & Tanks' },
-      ],
-    },
-    {
-      id: 4, slug: 'electro-mechanical-works', icon: 'spark', image: null, sort_order: 4, is_active: true,
-      title: { ar: 'الأعمال الإلكتروميكانيكية', en: 'Electro-Mechanical Works' },
-      excerpt: { ar: 'تيار منخفض، تكييف، إنذار ومكافحة حريق، وسباكة.', en: 'Low current, HVAC, fire alarm & fighting, plumbing.' },
-      body: {
-        ar: 'ننفّذ كامل الأعمال الإلكتروميكانيكية: أعمال التيار المنخفض (Low current)، وأعمال التكييف (HVAC)، وأنظمة الإنذار ومكافحة الحريق (Fire alarm & Fire fighting)، وأعمال الصرف الصحي والسباكة (Drainage & Plumbing).',
-        en: 'We deliver complete electro-mechanical works: Low current works, HVAC works, Fire alarm & Fire fighting systems, and Drainage & Plumbing works.',
-      },
-      items: [
-        { ar: 'أعمال التيار المنخفض', en: 'Low current works' },
-        { ar: 'أعمال التكييف', en: 'HVAC works' },
-        { ar: 'الإنذار ومكافحة الحريق', en: 'Fire alarm & Fire fighting' },
-        { ar: 'الصرف الصحي والسباكة', en: 'Drainage & Plumbing' },
-      ],
-    },
-    {
-      id: 5, slug: 'engineering-services', icon: 'trending-up', image: null, sort_order: 5, is_active: true,
-      title: { ar: 'الخدمات الهندسية', en: 'Engineering Services' },
-      excerpt: { ar: 'سيور نقل، أنظمة تخزين (راكينج)، طاولات رفع، وتركيب ماكينات.', en: 'Conveyors, racking systems, scissor lift tables and machine installations.' },
-      body: {
-        ar: 'نوفّر خدمات هندسية متخصّصة تشمل: أنواع السيور الناقلة (Belt / Roller / Chain / Screw conveyors)، وأنظمة التخزين الثقيلة والمتوسطة والخفيفة (Racking systems)، وطاولات الرفع المقصية (Scissor lift tables) بأي قدرة وأبعاد وارتفاع، وتركيب جميع أنواع الماكينات وربطها بخطوط الإنتاج.',
-        en: 'We provide specialized engineering services including: all types of conveyors (Belt / Roller / Chain / Screw), heavy/medium/light racking systems, scissor lift tables of any capacity, dimensions and height, and installation of all machine types linked to their production lines.',
-      },
-      items: [
-        { ar: 'السيور الناقلة (Conveyors)', en: 'Conveyors' },
-        { ar: 'أنظمة التخزين (Racking)', en: 'Racking systems' },
-        { ar: 'طاولات الرفع المقصية', en: 'Scissor lift tables' },
-        { ar: 'تركيب الماكينات', en: 'Machine installations' },
-      ],
-    },
-  ],
+  services: servicesData,
 
   projectCategories: [
     cat(1, 'سكني', 'Residential', 'residential', 1),
@@ -277,10 +202,11 @@ export const fallback = {
 
   videos: [
     {
-      id: 1, vimeo_id: '76979871', embed_url: 'https://player.vimeo.com/video/76979871',
-      thumbnail_url: null, is_published: true,
+      id: 1, source: 'youtube', youtube_id: 'dQw4w9WgXcQ', vimeo_id: null,
+      embed_url: 'https://www.youtube.com/embed/dQw4w9WgXcQ', file_url: null,
+      thumbnail_url: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg', is_published: true,
       title: { ar: 'فيديو تعريفي — نموذج (استبدله)', en: 'Company intro — sample (replace me)' },
-      description: { ar: 'فيديو نموذجي. ارفع فيديوهات UP Work على Vimeo واستبدل الـ ID من لوحة التحكم.', en: 'Sample video. Upload UP Work videos to Vimeo and replace the ID from the dashboard.' },
+      description: { ar: 'فيديو نموذجي. أضف رابط YouTube أو ارفع ملفًا من لوحة التحكم.', en: 'Sample video. Add a YouTube link or upload a file from the dashboard.' },
       category: cat(1, 'تعريفي', 'Company', 'company', 1),
     },
   ],

@@ -72,6 +72,39 @@ function ImageField({ value, onChange }) {
   )
 }
 
+function VideoFileField({ value, onChange }) {
+  const { current, file } = value || { current: null, file: null }
+  const preview = useMemo(() => (file ? URL.createObjectURL(file) : null), [file])
+  const shown = preview || current
+  return (
+    <div className="uploader">
+      {shown && (
+        <div className="thumb-box" style={{ width: '100%', maxWidth: 360 }}>
+          <video src={shown} controls style={{ width: '100%', borderRadius: 8 }} />
+          {file && (
+            <button type="button" className="thumb-box__del" onClick={() => onChange({ current, file: null })} title="إلغاء">
+              <X />
+            </button>
+          )}
+        </div>
+      )}
+      <label className="dropzone">
+        <Upload />
+        {shown ? 'تغيير الفيديو' : 'رفع ملف فيديو'}
+        <input
+          type="file"
+          accept="video/mp4,video/quicktime,video/webm"
+          hidden
+          onChange={(e) => {
+            const f = e.target.files?.[0]
+            if (f) onChange({ current, file: f })
+          }}
+        />
+      </label>
+    </div>
+  )
+}
+
 function GalleryField({ value, existing, onChange, onDeleteExisting }) {
   const files = value || []
   const previews = useMemo(() => files.map((f) => ({ f, url: URL.createObjectURL(f) })), [files])
@@ -147,10 +180,13 @@ export default function Field({ field, value, onChange, options, existing, onDel
       control = (
         <select className="input" value={value || ''} onChange={(e) => onChange(e.target.value)}>
           {(field.options || []).map((o) => (
-            <option key={o} value={o}>{o}</option>
+            <option key={o} value={o}>{field.optionLabels?.[o] || o}</option>
           ))}
         </select>
       )
+      break
+    case 'videofile':
+      control = <VideoFileField value={value} onChange={onChange} />
       break
     case 'relation':
       control = (

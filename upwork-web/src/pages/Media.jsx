@@ -84,7 +84,13 @@ export default function Media() {
         </div>
       </section>
 
-      {current && <Lightbox video={current.embed_url} onClose={() => setCurrent(null)} />}
+      {current && (
+        <Lightbox
+          video={current.source === 'upload' ? null : current.embed_url}
+          videoFile={current.source === 'upload' ? current.file_url : null}
+          onClose={() => setCurrent(null)}
+        />
+      )}
 
       <CTASection
         data={{
