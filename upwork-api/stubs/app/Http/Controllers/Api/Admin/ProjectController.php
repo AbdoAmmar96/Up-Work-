@@ -56,7 +56,7 @@ class ProjectController extends Controller
 
     protected function validated(Request $request): array
     {
-        return $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'array'],
             'title.ar' => ['required', 'string', 'max:200'],
             'title.en' => ['required', 'string', 'max:200'],
@@ -65,11 +65,19 @@ class ProjectController extends Controller
             'client' => ['nullable', 'array'],
             'location' => ['nullable', 'array'],
             'year' => ['nullable', 'integer', 'min:1990', 'max:2100'],
-            'project_category_id' => ['nullable', 'exists:project_categories,id'],
+            'category_id' => ['nullable', 'exists:project_categories,id'],
             'is_featured' => ['nullable', 'boolean'],
             'is_published' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer'],
         ]);
+
+        // الداشبورد بيبعت category_id، والعمود في قاعدة البيانات اسمه project_category_id
+        if (array_key_exists('category_id', $data)) {
+            $data['project_category_id'] = $data['category_id'];
+            unset($data['category_id']);
+        }
+
+        return $data;
     }
 
     protected function handleMedia(Request $request, Project $project): void

@@ -50,7 +50,7 @@ class VideoController extends Controller
 
     protected function validated(Request $request): array
     {
-        return $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'array'],
             'title.ar' => ['required', 'string', 'max:200'],
             'title.en' => ['required', 'string', 'max:200'],
@@ -60,10 +60,18 @@ class VideoController extends Controller
             'video' => ['nullable', 'file', 'mimetypes:video/mp4,video/quicktime,video/webm', 'max:153600'], // 150MB
             'thumbnail_url' => ['nullable', 'url'],
             'duration' => ['nullable', 'integer'],
-            'video_category_id' => ['nullable', 'exists:video_categories,id'],
+            'category_id' => ['nullable', 'exists:video_categories,id'],
             'is_published' => ['nullable', 'boolean'],
             'sort_order' => ['nullable', 'integer'],
         ]);
+
+        // الداشبورد بيبعت category_id، والعمود في قاعدة البيانات اسمه video_category_id
+        if (array_key_exists('category_id', $data)) {
+            $data['video_category_id'] = $data['category_id'];
+            unset($data['category_id']);
+        }
+
+        return $data;
     }
 
     // يجهّز البيانات حسب المصدر (youtube / upload) ويتعامل مع رفع الملف والصورة المصغّرة.

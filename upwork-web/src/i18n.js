@@ -17,7 +17,7 @@ const resources = {
       featured_title: 'مشاريع نفخر بيها',
       clients_eyebrow: 'عملاؤنا',
       clients_title: 'شركاء النجاح',
-      pillars_eyebrow: 'ليه UP Work',
+      pillars_eyebrow: 'لماذا UP Work',
       contact_eyebrow: 'تواصل',
       contact_title: 'عندك مشروع؟ يلا نبدأ',
       form: { name: 'الاسم', email: 'البريد الإلكتروني', phone: 'رقم الهاتف', subject: 'الموضوع', message: 'رسالتك', sending: 'جاري الإرسال...', success: 'تم استلام رسالتك، هنتواصل معاك قريب.', error: 'حصل خطأ، حاول تاني.', required: 'مطلوب' },

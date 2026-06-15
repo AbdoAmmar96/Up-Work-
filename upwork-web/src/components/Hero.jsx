@@ -60,7 +60,22 @@ export default function Hero({ data }) {
         </motion.div>
       </div>
 
-      <div className="hero__scroll">SCROLL</div>
+      <button
+        type="button"
+        className="hero__scroll"
+        onClick={() => {
+          const hero = document.querySelector('.hero')
+          const next = hero?.nextElementSibling
+          if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          else window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+        }}
+        aria-label={tt({ ar: 'انزل لأسفل', en: 'Scroll down' })}
+      >
+        <span>SCROLL</span>
+        <svg className="hero__scroll-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </section>
   )
 }
