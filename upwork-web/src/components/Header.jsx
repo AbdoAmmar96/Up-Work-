@@ -37,7 +37,7 @@ export default function Header() {
   }, [open])
 
   const toggleLang = () => i18n.changeLanguage(i18n.language === 'ar' ? 'en' : 'ar')
-  const logo = solid ? '/logo-color.png' : '/logo-white.png'
+  const logo = '/logo-color.png'
 
   return (
     <header className={`header${solid ? ' header--solid' : ''}`}>
