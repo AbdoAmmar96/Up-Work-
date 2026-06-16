@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <Seo description={tt({ ar: 'شركة هندسة ومقاولات حديثة في مصر: مقاولات وإنشاءات، إدارة مشاريع هندسية، وتطوير بنية تحتية.', en: 'A modern engineering & construction company in Egypt: contracting, project management, and infrastructure development.' })} />
-      <Hero data={s.home_hero} stats={s.home_stats?.items} />
+      <Hero data={s.home_hero} />
 
       {/* Pillars */}
       <section className="section">
