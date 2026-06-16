@@ -14,43 +14,38 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 }
 
-// يميّز الكلمة الأخيرة من عنوان الهيرو بتدرّج برتقالي،
-// ويكسر العنوان لسطرين عند الفاصلة لو وُجدت (عشان يتعرض مرتّب).
+// يميّز آخر كلمتين من عنوان الهيرو بتدرّج برتقالي (مثال: «في وقتها»)
+// ويكسر العنوان لسطرين عند الفاصلة لو وُجدت، مع إبقاء الكلمتين البرتقاليتين معًا.
 function renderTitle(text) {
   if (!text) return null
   const clean = String(text).trim()
   const words = clean.split(/\s+/)
   if (words.length < 2) return <span className="grad">{clean}</span>
-  const last = words.pop()
-  const head = words.join(' ')
-  // اكسر عند أول فاصلة عربية/لاتينية لو موجودة
+
+  // آخر كلمتين برتقالي وفي نفس السطر
+  const accent = words.slice(-2).join(' ')
+  const head = words.slice(0, -2).join(' ')
+  const accentSpan = <span className="grad hero__nowrap">{accent}</span>
+
+  // كسر عند أول فاصلة عربية/لاتينية لو موجودة
   const commaIdx = head.search(/[،,]/)
   if (commaIdx !== -1) {
     const line1 = head.slice(0, commaIdx + 1)
     const line2 = head.slice(commaIdx + 1).trim()
-    // آخر كلمتين (الكلمة قبل المتدرّجة + المتدرّجة) نخليهم وحدة واحدة ما تتكسرش
-    const l2words = line2.split(/\s+/)
-    const beforeLast = l2words.pop()
     return (
       <>
         <span className="line">{line1}</span>
         <span className="line">
-          {l2words.length ? l2words.join(' ') + ' ' : ''}
-          <span className="hero__nowrap">
-            {beforeLast} <span className="grad">{last}</span>
-          </span>
+          {line2 ? line2 + ' ' : ''}
+          {accentSpan}
         </span>
       </>
     )
   }
-  const hwords = head.split(/\s+/)
-  const hBeforeLast = hwords.pop()
   return (
     <>
-      {hwords.length ? hwords.join(' ') + ' ' : ''}
-      <span className="hero__nowrap">
-        {hBeforeLast} <span className="grad">{last}</span>
-      </span>
+      {head ? head + ' ' : ''}
+      {accentSpan}
     </>
   )
 }
