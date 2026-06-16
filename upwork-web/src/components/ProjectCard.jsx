@@ -10,6 +10,7 @@ export default function ProjectCard({ project }) {
   return (
     <Link to={`/projects/${project.slug}`} className="project-card">
       <div className="project-card__media">
+        <img src="/logo-mark-white.png" alt="" aria-hidden="true" className="project-card__ico" />
         {cover ? (
           <img src={cover} alt={tt(project.title)} loading="lazy" />
         ) : (

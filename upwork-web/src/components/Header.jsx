@@ -63,6 +63,9 @@ export default function Header() {
           <button className="lang-btn" onClick={toggleLang} aria-label="Switch language">
             {t('lang_switch')}
           </button>
+          <NavLink to="/contact" className="btn btn--orange header__cta">
+            {t('cta.start')}
+          </NavLink>
           <button
             className="menu-btn"
             onClick={() => setOpen((v) => !v)}
@@ -75,6 +78,13 @@ export default function Header() {
       </div>
 
       <div className={`mobile-nav${open ? ' open' : ''}`}>
+        <button
+          className="mobile-nav__close"
+          onClick={() => setOpen(false)}
+          aria-label="Close"
+        >
+          ×
+        </button>
         {links.map(([to, key]) => (
           <NavLink
             key={to}
@@ -85,6 +95,9 @@ export default function Header() {
             {t(key)}
           </NavLink>
         ))}
+        <NavLink to="/contact" className="btn btn--orange mobile-nav__cta">
+          {t('cta.start')}
+        </NavLink>
       </div>
     </header>
   )

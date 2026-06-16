@@ -12,7 +12,7 @@ export default function CTASection({ data }) {
   return (
     <section className="section">
       <div className="container">
-        <Reveal className="cta-band">
+        <Reveal className="cta-band cta-band--photo">
           <div className="cta-band__grid" />
           <div className="cta-band__inner">
             <div>

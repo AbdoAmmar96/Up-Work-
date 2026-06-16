@@ -1,7 +1,7 @@
 import React from 'react'
 import Reveal from './Reveal'
 
-export default function SectionHeading({ eyebrow, title, lead, center }) {
+export default function SectionHeading({ eyebrow, title, lead, center, oneline }) {
   return (
     <div className="section-head" style={center ? { marginInline: 'auto', textAlign: 'center' } : undefined}>
       {eyebrow && (
@@ -9,7 +9,7 @@ export default function SectionHeading({ eyebrow, title, lead, center }) {
           {eyebrow}
         </Reveal>
       )}
-      <Reveal as="h2" className="section-head__title" delay={0.05}>
+      <Reveal as="h2" className={`section-head__title${oneline ? ' section-head__title--oneline' : ''}`} delay={0.05}>
         {title}
       </Reveal>
       {lead && (

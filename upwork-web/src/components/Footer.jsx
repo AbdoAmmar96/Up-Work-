@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useSite } from '../context/site'
 import { useLocalized } from '../lib/i18nText'
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin, Youtube } from './icons'
+import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin, Youtube, ArrowUp } from './icons'
 
 const navLinks = [
   ['/about', 'nav.about'],
@@ -72,6 +72,14 @@ export default function Footer() {
             {t('footer.designed')}{' '}
             <a href="https://bp-eg.com" target="_blank" rel="noreferrer">شريك الأعمال — Business Partner</a>
           </span>
+          <button
+            type="button"
+            className="footer__top-link"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            {tt({ ar: 'العودة للأعلى', en: 'Back to top' })}
+            <ArrowUp />
+          </button>
         </div>
       </div>
     </footer>

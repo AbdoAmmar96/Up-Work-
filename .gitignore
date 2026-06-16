@@ -24,6 +24,11 @@ Thumbs.db
 # Misc
 *.tmp
 
+# Design source files (compressed copies live in upwork-web/public/)
+index(4).html
+a.png
+construction_reel_landscape_1920x1080.jpg.jpeg
+
 # Local Claude Code config + personal dev notes
 .claude/
 How it work

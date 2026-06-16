@@ -14,15 +14,58 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 }
 
-export default function Hero({ data }) {
+// يميّز الكلمة الأخيرة من عنوان الهيرو بتدرّج برتقالي،
+// ويكسر العنوان لسطرين عند الفاصلة لو وُجدت (عشان يتعرض مرتّب).
+function renderTitle(text) {
+  if (!text) return null
+  const clean = String(text).trim()
+  const words = clean.split(/\s+/)
+  if (words.length < 2) return <span className="grad">{clean}</span>
+  const last = words.pop()
+  const head = words.join(' ')
+  // اكسر عند أول فاصلة عربية/لاتينية لو موجودة
+  const commaIdx = head.search(/[،,]/)
+  if (commaIdx !== -1) {
+    const line1 = head.slice(0, commaIdx + 1)
+    const line2 = head.slice(commaIdx + 1).trim()
+    // آخر كلمتين (الكلمة قبل المتدرّجة + المتدرّجة) نخليهم وحدة واحدة ما تتكسرش
+    const l2words = line2.split(/\s+/)
+    const beforeLast = l2words.pop()
+    return (
+      <>
+        <span className="line">{line1}</span>
+        <span className="line">
+          {l2words.length ? l2words.join(' ') + ' ' : ''}
+          <span className="hero__nowrap">
+            {beforeLast} <span className="grad">{last}</span>
+          </span>
+        </span>
+      </>
+    )
+  }
+  const hwords = head.split(/\s+/)
+  const hBeforeLast = hwords.pop()
+  return (
+    <>
+      {hwords.length ? hwords.join(' ') + ' ' : ''}
+      <span className="hero__nowrap">
+        {hBeforeLast} <span className="grad">{last}</span>
+      </span>
+    </>
+  )
+}
+
+export default function Hero({ data, stats }) {
   const { t } = useTranslation()
   const { tt } = useLocalized()
   const d = data || {}
+  const strip = (stats || []).slice(0, 4)
 
   return (
     <section className="hero">
       <div className="hero__grid" />
-      <div className="hero__glow" />
+      <div className="hero__glow hero__glow--a" />
+      <div className="hero__glow hero__glow--b" />
       <img src="/logo-mark-white.png" alt="" className="hero__mark" aria-hidden="true" />
       <svg className="hero__diagonals" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
         <line x1="120" y1="400" x2="320" y2="40" stroke="#f97316" strokeWidth="2" opacity="0.8" />
@@ -32,11 +75,12 @@ export default function Hero({ data }) {
 
       <div className="container">
         <motion.div className="hero__inner" variants={container} initial="hidden" animate="show">
-          <motion.span className="eyebrow hero__eyebrow" variants={item}>
+          <motion.span className="hero__badge" variants={item}>
+            <span className="hero__badge-dot" />
             {tt(d.eyebrow) || t('tagline')}
           </motion.span>
           <motion.h1 className="hero__title" variants={item}>
-            {tt(d.title)}
+            {renderTitle(tt(d.title))}
           </motion.h1>
           <motion.p className="hero__lead" variants={item}>
             {tt(d.subtitle)}
@@ -48,15 +92,20 @@ export default function Hero({ data }) {
             </Link>
             <Link to="/projects" className="btn btn--ghost btn--lg">
               {tt(d.secondary_cta) || t('cta.see_work')}
+              <ArrowRight className="arrow" />
             </Link>
           </motion.div>
-          <motion.div className="hero__meta" variants={item}>
-            <span>ENGINEER</span>
-            <span className="dot" />
-            <span>BUILD</span>
-            <span className="dot" />
-            <span>ELEVATE</span>
-          </motion.div>
+
+          {strip.length > 0 && (
+            <motion.div className="hero__strip" variants={item}>
+              {strip.map((s, i) => (
+                <div className="hero__strip-item" key={i}>
+                  <span className="hero__strip-num">{s.value}</span>
+                  <span className="hero__strip-lbl">{tt(s.label)}</span>
+                </div>
+              ))}
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
@@ -71,10 +120,8 @@ export default function Hero({ data }) {
         }}
         aria-label={tt({ ar: 'انزل لأسفل', en: 'Scroll down' })}
       >
-        <span>SCROLL</span>
-        <svg className="hero__scroll-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-          <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <span className="hero__mouse" aria-hidden="true" />
+        <span className="hero__scroll-label">{tt({ ar: 'اسكرول', en: 'Scroll' })}</span>
       </button>
     </section>
   )

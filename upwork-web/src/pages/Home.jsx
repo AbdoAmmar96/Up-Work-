@@ -34,12 +34,13 @@ export default function Home() {
   return (
     <>
       <Seo description={tt({ ar: 'شركة هندسة ومقاولات حديثة في مصر: مقاولات وإنشاءات، إدارة مشاريع هندسية، وتطوير بنية تحتية.', en: 'A modern engineering & construction company in Egypt: contracting, project management, and infrastructure development.' })} />
-      <Hero data={s.home_hero} />
+      <Hero data={s.home_hero} stats={s.home_stats?.items} />
 
       {/* Pillars */}
       <section className="section">
         <div className="container">
           <SectionHeading
+            oneline
             eyebrow={t('pillars_eyebrow')}
             title={tt({ ar: 'نبني على أساس من الخبرة والدقة', en: 'Built on expertise and precision' })}
             lead={tt({
@@ -95,8 +96,10 @@ export default function Home() {
           <div className="container">
             <SectionHeading eyebrow={t('featured_eyebrow')} title={t('featured_title')} />
             <div className="projects-grid">
-              {featured.map((p) => (
-                <ProjectCard project={p} key={p.id} />
+              {featured.map((p, i) => (
+                <Reveal key={p.id} delay={i * 0.12}>
+                  <ProjectCard project={p} />
+                </Reveal>
               ))}
             </div>
             <Reveal className="btn-row" style={{ marginTop: '2.4rem' }} delay={0.1}>
