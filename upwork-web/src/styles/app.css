@@ -2050,15 +2050,21 @@ html[lang='ar'] .hero__title { line-height: 1.4; font-size: clamp(1.9rem, 4.6vw,
   background: #fff;
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.08), 0 6px 22px -16px rgba(15, 23, 42, 0.25);
 }
-/* الكلام أسود حتى وهو فوق الهيرو (غير مثبّت) */
-.header:not(.header--solid) .nav__link { color: var(--ink); }
-.header:not(.header--solid) .nav__link--active { color: var(--blue); }
-.header:not(.header--solid) .lang-btn { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
-.header:not(.header--solid) .menu-btn span,
-.header:not(.header--solid) .menu-btn span::before,
-.header:not(.header--solid) .menu-btn span::after { background: var(--ink); }
+/* الكلام أسود حتى وهو فوق الهيرو (غير مثبّت) — مقصور على شريط النافبار فقط
+   عشان مايأثرش على روابط قائمة الموبايل المنسدلة */
+.header:not(.header--solid) .header__inner .nav__link { color: var(--ink); }
+.header:not(.header--solid) .header__inner .nav__link--active { color: var(--blue); }
+.header:not(.header--solid) .header__inner .lang-btn { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.header:not(.header--solid) .header__inner .menu-btn span,
+.header:not(.header--solid) .header__inner .menu-btn span::before,
+.header:not(.header--solid) .header__inner .menu-btn span::after { background: var(--ink); }
 /* اللوجو الملوّن دائمًا بحجم ثابت */
 .brand__logo { height: 40px; }
+
+/* قائمة الموبايل تغطّي كل حاجة (فوق شريط النافبار الأبيض) لما تتفتح */
+.mobile-nav { z-index: 200; }
+.mobile-nav a { color: #fff; }
+.mobile-nav a.nav__link--active { color: var(--orange); }
 
 /* مسافة بين النافبار والهيرو */
 .hero { margin-top: 76px; padding-block: 4rem 4rem; min-height: calc(100svh - 76px); }
