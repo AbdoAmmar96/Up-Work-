@@ -2060,8 +2060,9 @@ html[lang='ar'] .hero__title { line-height: 1.4; font-size: clamp(1.9rem, 4.6vw,
   background: #fff;
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.08), 0 6px 22px -16px rgba(15, 23, 42, 0.25);
 }
-/* الكلام أسود حتى وهو فوق الهيرو (غير مثبّت) — مقصور على شريط النافبار فقط
-   عشان مايأثرش على روابط قائمة الموبايل المنسدلة */
+/* إزالة الـ backdrop-filter — كان بيخلي قائمة الموبايل (fixed) تتمركز نسبةً للنافبار
+   فتظهر الخلفية السمرة متزحزحة (shift) بدل ما تغطّي الشاشة كلها */
+.header--solid { backdrop-filter: none; }
 .header:not(.header--solid) .header__inner .nav__link { color: var(--ink); }
 .header:not(.header--solid) .header__inner .nav__link--active { color: var(--blue); }
 .header:not(.header--solid) .header__inner .lang-btn { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
