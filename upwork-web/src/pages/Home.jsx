@@ -23,12 +23,15 @@ export default function Home() {
   const { tt } = useLocalized()
   const { settings } = useSite()
   const { data: pages, loading } = useContent(() => getPages('home'), [])
+  const { data: aboutPages } = useContent(() => getPages('about'), [])
   const { data: services } = useContent(getServices, [])
   const { data: projects } = useContent(() => getProjects({ featured: 1 }), [])
 
   if (loading) return <Loader />
 
   const s = sectionsToMap(pages)
+  const a = sectionsToMap(aboutPages)
+  const values = a.about_values?.items || []
   const featured = (projects || []).slice(0, 3)
 
   return (
@@ -51,6 +54,31 @@ export default function Home() {
           <Pillars items={s.home_pillars?.items} />
         </div>
       </section>
+
+      {/* Values / principles */}
+      {values.length > 0 && (
+        <section className="section section--gray">
+          <div className="container">
+            <SectionHeading
+              eyebrow={tt({ ar: 'قيمنا', en: 'Our values' })}
+              title={tt({ ar: 'المبادئ التي تحركنا', en: 'The principles that drive us' })}
+              lead={tt({
+                ar: 'القيم التي توجّه كل قرار وكل مشروع ننفّذه.',
+                en: 'The values that guide every decision and every project we deliver.',
+              })}
+            />
+            <div className="values-grid">
+              {values.map((v, i) => (
+                <Reveal className="value-card" key={i} delay={i * 0.08}>
+                  <div className="value__index">0{i + 1}</div>
+                  <h3 className="value__title">{tt(v.title)}</h3>
+                  <p className="value__text">{tt(v.text)}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Services preview */}
       <section className="section section--gray">

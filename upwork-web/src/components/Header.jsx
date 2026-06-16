@@ -63,6 +63,14 @@ export default function Header() {
           <button className="lang-btn" onClick={toggleLang} aria-label="Switch language">
             {t('lang_switch')}
           </button>
+          <a
+            href="/Up-Work-Profile.pdf"
+            target="_blank"
+            rel="noreferrer"
+            className="btn btn--invert header__cta"
+          >
+            {t('cta.profile')}
+          </a>
           <NavLink to="/contact" className="btn btn--orange header__cta">
             {t('cta.start')}
           </NavLink>
@@ -95,6 +103,14 @@ export default function Header() {
             {t(key)}
           </NavLink>
         ))}
+        <a
+          href="/Up-Work-Profile.pdf"
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn--invert mobile-nav__cta"
+        >
+          {t('cta.profile')}
+        </a>
         <NavLink to="/contact" className="btn btn--orange mobile-nav__cta">
           {t('cta.start')}
         </NavLink>

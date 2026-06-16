@@ -90,7 +90,7 @@ export default function Hero({ data, stats }) {
               {tt(d.primary_cta) || t('cta.start')}
               <ArrowRight className="arrow" />
             </Link>
-            <Link to="/projects" className="btn btn--ghost btn--lg">
+            <Link to="/projects" className="btn btn--invert btn--lg">
               {tt(d.secondary_cta) || t('cta.see_work')}
               <ArrowRight className="arrow" />
             </Link>

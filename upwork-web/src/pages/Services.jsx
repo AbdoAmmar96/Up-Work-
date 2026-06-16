@@ -35,46 +35,57 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
-          <div className="services-list">
-            {(services || []).map((svc, i) => (
-              <Reveal className="service-row" key={svc.id} delay={i * 0.06}>
-                <div className="service__index">0{i + 1}</div>
-                <div>
-                  <div className="service__head">
-                    <span className="service__icon">
-                      <KeyIcon name={svc.icon} />
-                    </span>
-                    <h2 className="service__title">{tt(svc.title)}</h2>
-                  </div>
-                  <p className="service__text">{tt(svc.body) || tt(svc.excerpt)}</p>
-                  {svc.items?.length > 0 && (
-                    <ul className="service__items">
-                      {svc.items.map((it, j) => {
-                        const label = it.title ? tt(it.title) : tt(it)
-                        return it.slug ? (
-                          <li key={it.slug}>
-                            <Link to={`/services/${svc.slug}/${it.slug}`} className="service__item service__item--link">
-                              {label}
-                            </Link>
-                          </li>
-                        ) : (
-                          <li className="service__item" key={j}>{label}</li>
-                        )
-                      })}
-                    </ul>
-                  )}
-                </div>
-                <Link to="/contact" className="service__cta">
-                  {t('cta.contact')}
-                  <ArrowRight />
-                </Link>
-              </Reveal>
-            ))}
+      {(services || []).map((svc, i) => (
+        <section className={`section${i % 2 === 1 ? ' section--gray' : ''}`} key={svc.id}>
+          <div className="container">
+            {/* رأس الخدمة الرئيسية */}
+            <div className="svc-group__head">
+              <span className="svc-group__icon">
+                <KeyIcon name={svc.icon} />
+              </span>
+              <div>
+                <span className="svc-group__index">0{i + 1}</span>
+                <h2 className="svc-group__title">{tt(svc.title)}</h2>
+              </div>
+            </div>
+            {tt(svc.body) || tt(svc.excerpt) ? (
+              <p className="svc-group__text">{tt(svc.body) || tt(svc.excerpt)}</p>
+            ) : null}
+
+            {/* الخدمات الفرعية كـ كروت */}
+            {svc.items?.length > 0 && (
+              <div className="subservice-grid">
+                {svc.items.map((it, j) => {
+                  const label = it.title ? tt(it.title) : tt(it)
+                  const desc = it.body ? tt(it.body) : ''
+                  const inner = (
+                    <>
+                      <span className="subservice-card__num">{String(j + 1).padStart(2, '0')}</span>
+                      <h3 className="subservice-card__title">{label}</h3>
+                      {desc && <p className="subservice-card__text">{desc}</p>}
+                      <span className="subservice-card__more">
+                        {t('cta.explore')}
+                        <ArrowRight />
+                      </span>
+                    </>
+                  )
+                  return it.slug ? (
+                    <Reveal key={it.slug} delay={(j % 4) * 0.06}>
+                      <Link to={`/services/${svc.slug}/${it.slug}`} className="subservice-card">
+                        {inner}
+                      </Link>
+                    </Reveal>
+                  ) : (
+                    <Reveal className="subservice-card subservice-card--static" key={j} delay={(j % 4) * 0.06}>
+                      {inner}
+                    </Reveal>
+                  )
+                })}
+              </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
       <CTASection
         data={{

@@ -10,9 +10,9 @@ export default function CTASection({ data }) {
   const { tt } = useLocalized()
   const d = data || {}
   return (
-    <section className="section">
+    <section className="section cta-section--full">
       <div className="container">
-        <Reveal className="cta-band cta-band--photo">
+        <Reveal className="cta-band cta-band--photo cta-band--full">
           <div className="cta-band__grid" />
           <div className="cta-band__inner">
             <div>
