@@ -2172,3 +2172,6 @@ html[dir='rtl'] .subservice-card:hover .subservice-card__more svg { transform: s
 .subservice-card--static { cursor: default; }
 @media (max-width: 900px) { .subservice-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .subservice-grid { grid-template-columns: 1fr; } .svc-group__head { flex-direction: column; } }
+
+/* ---------- breadcrumb في المنتصف (صفحات الخدمة الفرعية) ---------- */
+.page-hero .breadcrumb { justify-content: center; }

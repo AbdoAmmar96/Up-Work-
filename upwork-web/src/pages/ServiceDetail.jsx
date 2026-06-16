@@ -48,7 +48,7 @@ export default function ServiceDetail() {
         <img src="/logo-mark-white.png" alt="" className="page-hero__mark" aria-hidden="true" />
         <div className="container page-hero__inner">
           <nav className="breadcrumb">
-            <Link to="/services">{t('services_title')}</Link>
+            <Link to="/services">{t('services_eyebrow')}</Link>
             <span>/</span>
             <Link to={`/services#${service.slug}`}>{tt(service.title)}</Link>
           </nav>
